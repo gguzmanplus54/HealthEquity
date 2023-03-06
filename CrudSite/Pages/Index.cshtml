@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <th>Id</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Doors</th>
+        <th>Color</th>
+          <th> </th>
+           <th> </th>
+    </thead>
+    <tbody>
+        @foreach (var car in Model.ListOfCars)
+        {
+            <tr>
+                <td>@car.Id</td>
+                <td>@car.Make</td>
+                <td>@car.Model</td>
+                <td>@car.Year</td>
+                <td>@car.Doors</td>
+                <td>@car.Color</td>
+                <td>@car.Color</td>
+                  
+                <td> <form method="post" asp-page-handler="GuessPrice" asp-route-id="@car.Id">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="guessPrice" />
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-sm" >Guess Price</button>
+                    </form></td>
+            </tr>
+        }
+    </tbody>
+</table>
